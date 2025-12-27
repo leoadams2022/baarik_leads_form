@@ -7,6 +7,9 @@ import TextAreaInput from "./components/TextAreaInput";
 import { submitLeadToZoho } from "./Zoho";
 import { googleSubmition } from "./Google";
 import { useAppDialog } from "./AppDialogProvider";
+// import  loadGif from './assets/load.gif' ;
+import loadGif from "./assets/load.gif";
+
 const industryOptions = [
   "متجر ملابس وأزياء",
   "متجر إلكترونيات وأجهزة",
@@ -64,6 +67,7 @@ export default function Form() {
   const [Agent, setAgent] = React.useState("");
   const [isMoreFieldsOpen, setIsMoreFieldsOpen] = React.useState(false);
   const [isSetDefaultsOpen, setIsSetDefaultsOpen] = React.useState(false);
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -77,6 +81,7 @@ export default function Form() {
       });
       return;
     }
+    setIsSubmitting(true);
     const ZohoData = {
       LastName,
       Phone,
@@ -100,6 +105,7 @@ export default function Form() {
           variant: "green",
           durationMs: 2000,
         });
+        handleReset(e, false);
       } else {
         alert({
           title: "Submission Failed",
@@ -111,6 +117,8 @@ export default function Form() {
     } catch (error) {
       console.error("Error submitting lead:", error);
       alert(`Error submitting lead: ${error.message}`);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -191,7 +199,11 @@ export default function Form() {
             you add new leads here.{" "}
           </h2>
         </div>
-        <form action="" className="space-y-4 py-4" onSubmit={handleSubmit}>
+        <form
+          action=""
+          className="space-y-4 py-4 relative"
+          onSubmit={handleSubmit}
+        >
           <InputText
             id="LastName"
             name="LastName"
@@ -297,7 +309,7 @@ export default function Form() {
               onChange={(e) => setEmail(e.target.value)}
             />
             <InputText
-              id="Company"
+              id="Comload.gifpany"
               name="Company"
               label="Company"
               placeholder="Enter Company"
@@ -336,7 +348,12 @@ export default function Form() {
           </ToggleableSection>
 
           <div className="flex justify-evenly items-center gap-2">
-            <Button outline={true} className=" cursor-pointer" type="submit">
+            <Button
+              outline={true}
+              className=" cursor-pointer"
+              type="submit"
+              disabled={isSubmitting}
+            >
               Submit
             </Button>
             <Button
@@ -345,9 +362,17 @@ export default function Form() {
               type="reset"
               color={"red"}
               onClick={(e) => handleReset(e, true)}
+              disabled={isSubmitting}
             >
               Reset
             </Button>
+          </div>
+          <div
+            className={`size-full  absolute top-0 left-0 flex justify-center items-center ${
+              isSubmitting ? "" : "hidden"
+            }`}
+          >
+            <img src={loadGif} alt="loading" className="w-[80%]" />
           </div>
         </form>
       </div>
