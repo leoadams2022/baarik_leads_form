@@ -184,7 +184,7 @@ export default function Form() {
         </div>
         {/* title / discription */}
         <div className="flex flex-col gap-1">
-          <h1 className="text-4xl font-extrabold line-clamp-1 text-pop">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold line-clamp-1 text-pop">
             Baarik New Leads Form
           </h1>
           <h2 className="text-sm font-bold italic line-clamp-2 text-dem">
@@ -563,7 +563,7 @@ function SetDefaultValues({ setIsOpen, isOpen }) {
           </div>
           {/* title / discription */}
           <div className="flex flex-col gap-1">
-            <h1 className="text-4xl font-extrabold line-clamp-1 text-pop">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold line-clamp-1 text-pop">
               Default Values{" "}
             </h1>
             <h2 className="text-sm font-bold italic line-clamp-2 text-dem">
