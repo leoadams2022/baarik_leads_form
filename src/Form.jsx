@@ -532,7 +532,7 @@ function SetDefaultValues({ setIsOpen, isOpen }) {
         onClick={handleCancel}
       >
         <div
-          className="relative bg-pop w-[90%] sm:max-w-lg max-h-[90%] rounded  shadow-lg py-6 px-4 flex flex-col gap-4 overflow-auto transition-all duration-300"
+          className="relative bg-pop w-[90%] sm:max-w-lg max-h-[90%] rounded  shadow-lg pt-12 pb-6 px-4 flex flex-col gap-4 overflow-auto transition-all duration-300"
           onClick={(e) => {
             e.stopPropagation();
           }}
